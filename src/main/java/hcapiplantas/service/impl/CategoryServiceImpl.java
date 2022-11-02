@@ -25,11 +25,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category updateCategory(Long id, Category category) throws DataNotFoundException {
-        Optional<Category> existingCategory = repository.findById(id);
-        if(existingCategory.isEmpty())
-            throw new DataNotFoundException(id.toString());
-        existingCategory.get().setName(category.getName());
-        existingCategory.get().setDescription(category.getDescription());
-        return repository.save(existingCategory.get());
+        Category existingCategory = getCategoryById(id);
+        existingCategory.setName(category.getName());
+        existingCategory.setDescription(category.getDescription());
+        return repository.save(existingCategory);
+    }
+
+    @Override
+    public Category getCategoryById(Long id) throws DataNotFoundException {
+        return repository.findById(id).orElseThrow(() -> new DataNotFoundException(id.toString()));
     }
 }

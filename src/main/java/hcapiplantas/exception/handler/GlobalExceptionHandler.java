@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +17,7 @@ public class GlobalExceptionHandler {
 
     private final StandardErrorResponse standardErrorResponse = new StandardErrorResponse();
 
-    @ExceptionHandler(value = {DataNotFoundException.class, DataAlreadyExistsException.class})
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataNotFoundException.class, DataAlreadyExistsException.class})
     public ResponseEntity<StandardErrorResponse> handleBadRequestException(Exception ex){
         standardErrorResponse.setTimestamp(LocalDateTime.now());
         standardErrorResponse.setStatus(HttpStatus.BAD_REQUEST);

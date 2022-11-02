@@ -20,6 +20,11 @@ public class CategoryController {
     @Autowired
     private CategoryServiceImpl service;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Long id) throws DataNotFoundException {
+        return ResponseEntity.ok(convertToDto(service.getCategoryById(id)));
+    }
+
     @PostMapping
     public ResponseEntity<CategoryResponseDto> createCategory(@Valid @RequestBody CategoryRequestDto request) throws DataAlreadyExistsException {
         Category category = convertToEntity(request);
