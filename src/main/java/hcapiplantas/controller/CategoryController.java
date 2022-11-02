@@ -1,5 +1,6 @@
 package hcapiplantas.controller;
 
+import hcapiplantas.exception.DataAlreadyExistsException;
 import hcapiplantas.model.dto.CategoryRequestDto;
 import hcapiplantas.model.dto.CategoryResponseDto;
 import hcapiplantas.model.entity.Category;
@@ -23,7 +24,7 @@ public class CategoryController {
     private CategoryServiceImpl service;
 
     @PostMapping
-    public ResponseEntity<CategoryResponseDto> createCategory(@Valid @RequestBody CategoryRequestDto request) {
+    public ResponseEntity<CategoryResponseDto> createCategory(@Valid @RequestBody CategoryRequestDto request) throws DataAlreadyExistsException {
         Category category = convertToEntity(request);
         CategoryResponseDto response = convertToDto(service.createCategory(category));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

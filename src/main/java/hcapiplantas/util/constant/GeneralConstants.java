@@ -12,4 +12,5 @@ public abstract class GeneralConstants {
     public static final String OUTSIDE_EXPECTED_PATTERN_MESSAGE = "O campo {field} está fora do padrão esperado.";
 
 
+    public static final String DATA_ALREADY_EXISTS_MESSAGE = "O dado %s já está cadastrado.";
 }
