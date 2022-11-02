@@ -1,18 +1,15 @@
 package hcapiplantas.controller;
 
 import hcapiplantas.exception.DataAlreadyExistsException;
+import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.model.dto.CategoryRequestDto;
 import hcapiplantas.model.dto.CategoryResponseDto;
 import hcapiplantas.model.entity.Category;
 import hcapiplantas.service.impl.CategoryServiceImpl;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -28,6 +25,11 @@ public class CategoryController {
         Category category = convertToEntity(request);
         CategoryResponseDto response = convertToDto(service.createCategory(category));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequestDto request) throws DataNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(convertToDto(service.updateCategory(id, convertToEntity(request))));
     }
 
 

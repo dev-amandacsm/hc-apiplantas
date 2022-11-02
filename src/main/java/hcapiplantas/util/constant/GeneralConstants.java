@@ -13,4 +13,5 @@ public abstract class GeneralConstants {
 
 
     public static final String DATA_ALREADY_EXISTS_MESSAGE = "O dado %s já está cadastrado.";
+    public static final String DATA_NOT_FOUND_MESSAGE = "O dado com id %s não foi encontrado.";
 }
