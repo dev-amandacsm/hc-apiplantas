@@ -24,6 +24,10 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private Set<Plant> plants;
 
+    public Long getId() {
+        return this.id;
+    }
+
     public String getDescription(){
         return this.description;
     }
