@@ -1,5 +1,6 @@
 package hcapiplantas.config;
 
+import hcapiplantas.service.impl.CategoryServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 
@@ -7,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 public class Configuration {
 
     @Bean
-    public ModelMapper modelMapper(){
-        return new ModelMapper();
+    public CategoryServiceImpl service(){
+        return new CategoryServiceImpl();
     }
 
 }
