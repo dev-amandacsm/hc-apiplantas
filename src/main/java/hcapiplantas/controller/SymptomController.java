@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/sintomas")
@@ -23,6 +25,13 @@ public class SymptomController {
     @GetMapping("/{id}")
     public ResponseEntity<SymptomResponseDto> getSymptomById(@PathVariable Long id) throws DataNotFoundException {
         return ResponseEntity.ok(convertToDto(service.getSymptomById(id)));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<SymptomResponseDto>> getAllSymptoms(){
+        List<SymptomResponseDto> symptoms = new ArrayList<>();
+        service.getAllSymptoms().forEach(symptom -> symptoms.add(convertToDto(symptom)));
+        return ResponseEntity.ok(symptoms);
     }
 
     @PostMapping

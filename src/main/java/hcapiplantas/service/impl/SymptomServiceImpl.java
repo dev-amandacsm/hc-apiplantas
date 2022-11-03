@@ -20,6 +20,11 @@ public class SymptomServiceImpl implements SymptomService {
     }
 
     @Override
+    public Iterable<Symptom> getAllSymptoms() {
+        return repository.findAll();
+    }
+
+    @Override
     public Symptom createSymptom(Symptom symptom) throws DataAlreadyExistsException {
         if(repository.findByName(symptom.getName()).isEmpty())
             return repository.save(symptom);
