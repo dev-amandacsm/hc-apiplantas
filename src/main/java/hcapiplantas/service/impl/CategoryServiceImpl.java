@@ -6,11 +6,9 @@ import hcapiplantas.model.entity.Category;
 import hcapiplantas.repository.CategoryRepository;
 import hcapiplantas.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
