@@ -20,6 +20,11 @@ public class RestrictionServiceImpl implements RestrictionService {
     }
 
     @Override
+    public Iterable<Restriction> getAllRestrictions() {
+        return repository.findAll();
+    }
+
+    @Override
     public Restriction createRestriction(Restriction restriction) throws DataAlreadyExistsException {
         if(repository.findByGroupName(restriction.getGroupName()).isEmpty())
             return repository.save(restriction);
@@ -32,4 +37,5 @@ public class RestrictionServiceImpl implements RestrictionService {
         existingRestriction.setGroupName(restriction.getGroupName());
         return repository.save(existingRestriction);
     }
+
 }

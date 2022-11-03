@@ -11,4 +11,6 @@ public interface RestrictionService {
     Restriction getRestrictionById(Long id) throws DataNotFoundException;
 
     Restriction updateRestriction(Long id, Restriction convertToEntity) throws DataNotFoundException;
+
+    Iterable<Restriction> getAllRestrictions();
 }
