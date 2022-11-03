@@ -17,12 +17,20 @@ public class GlobalExceptionHandler {
 
     private final StandardErrorResponse standardErrorResponse = new StandardErrorResponse();
 
-    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataNotFoundException.class, DataAlreadyExistsException.class})
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataAlreadyExistsException.class})
     public ResponseEntity<StandardErrorResponse> handleBadRequestException(Exception ex){
         standardErrorResponse.setTimestamp(LocalDateTime.now());
         standardErrorResponse.setStatus(HttpStatus.BAD_REQUEST);
         standardErrorResponse.setErrors(List.of(ex.getMessage()));
         return new ResponseEntity<>(standardErrorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<StandardErrorResponse> handleNotFoundException(Exception ex){
+        standardErrorResponse.setTimestamp(LocalDateTime.now());
+        standardErrorResponse.setStatus(HttpStatus.NOT_FOUND);
+        standardErrorResponse.setErrors(List.of(ex.getMessage()));
+        return new ResponseEntity<>(standardErrorResponse, HttpStatus.NOT_FOUND);
     }
 
 }

@@ -1,6 +1,7 @@
 package hcapiplantas.controller;
 
 import hcapiplantas.exception.DataAlreadyExistsException;
+import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.model.dto.RestrictionRequestDto;
 import hcapiplantas.model.dto.RestrictionResponseDto;
 import hcapiplantas.model.dto.SymptomRequestDto;
@@ -11,10 +12,7 @@ import hcapiplantas.service.impl.RestrictionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,6 +22,11 @@ public class RestrictionController {
 
     @Autowired
     private RestrictionServiceImpl service;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RestrictionResponseDto> getRestrictionById(@PathVariable Long id) throws DataNotFoundException {
+        return ResponseEntity.ok(convertToDto(service.getRestrictionById(id)));
+    }
 
     @PostMapping
     public ResponseEntity<RestrictionResponseDto> createSymptom(@Valid @RequestBody RestrictionRequestDto request) throws DataAlreadyExistsException {
