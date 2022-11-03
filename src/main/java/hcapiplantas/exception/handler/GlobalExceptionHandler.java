@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class GlobalExceptionHandler {
 
     private final StandardErrorResponse standardErrorResponse = new StandardErrorResponse();
 
-    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataAlreadyExistsException.class})
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataAlreadyExistsException.class, SQLIntegrityConstraintViolationException.class})
     public ResponseEntity<StandardErrorResponse> handleBadRequestException(Exception ex){
         standardErrorResponse.setTimestamp(LocalDateTime.now());
         standardErrorResponse.setStatus(HttpStatus.BAD_REQUEST);

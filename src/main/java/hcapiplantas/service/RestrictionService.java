@@ -9,4 +9,6 @@ public interface RestrictionService {
     Restriction createRestriction(Restriction restriction) throws DataAlreadyExistsException;
 
     Restriction getRestrictionById(Long id) throws DataNotFoundException;
+
+    Restriction updateRestriction(Long id, Restriction convertToEntity) throws DataNotFoundException;
 }

@@ -25,4 +25,11 @@ public class RestrictionServiceImpl implements RestrictionService {
             return repository.save(restriction);
         throw new DataAlreadyExistsException(restriction.getGroupName());
     }
+
+    @Override
+    public Restriction updateRestriction(Long id, Restriction restriction) throws DataNotFoundException {
+        Restriction existingRestriction = getRestrictionById(id);
+        existingRestriction.setGroupName(restriction.getGroupName());
+        return repository.save(existingRestriction);
+    }
 }
