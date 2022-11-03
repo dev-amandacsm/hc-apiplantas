@@ -15,6 +15,11 @@ public class SymptomServiceImpl implements SymptomService {
     private SymptomRepository repository;
 
     @Override
+    public Symptom getSymptomById(Long id) throws DataNotFoundException {
+        return repository.findById(id).orElseThrow(() -> new DataNotFoundException(id.toString()));
+    }
+
+    @Override
     public Symptom createSymptom(Symptom symptom) throws DataAlreadyExistsException {
         if(repository.findByName(symptom.getName()).isEmpty())
             return repository.save(symptom);
@@ -22,15 +27,9 @@ public class SymptomServiceImpl implements SymptomService {
     }
 
     @Override
-    public Symptom getSymptomById(Long id) throws DataNotFoundException {
-        return repository.findById(id).orElseThrow(() -> new DataNotFoundException(id.toString()));
+    public Symptom updateCategory(Long id, Symptom symptom) throws DataNotFoundException {
+        Symptom existingSymptom = getSymptomById(id);
+        existingSymptom.setName(symptom.getName());
+        return repository.save(existingSymptom);
     }
-
-//    @Override
-//    public Symptom updateCategory(Long id, Symptom symptom) {
-//        Optional<Symptom> existingSymptom = repository.findById(id);
-//
-//        if(repository.findById(id).isEmpty()){
-//
-//    }
 }

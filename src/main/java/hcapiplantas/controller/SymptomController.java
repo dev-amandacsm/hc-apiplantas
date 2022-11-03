@@ -31,11 +31,11 @@ public class SymptomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.createSymptom(symptom)));
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<SymptomResponseDto> updateSymptom(@PathVariable Long id, @Valid @RequestBody SymptomRequestDto request){
-//        Symptom symptom = convertToEntity(request);
-//        return ResponseEntity.ok(convertToDto(service.updateCategory(id, symptom)));
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<SymptomResponseDto> updateSymptom(@PathVariable Long id, @Valid @RequestBody SymptomRequestDto request) throws DataNotFoundException {
+        Symptom symptom = convertToEntity(request);
+        return ResponseEntity.ok(convertToDto(service.updateCategory(id, symptom)));
+    }
 
     private Symptom convertToEntity(SymptomRequestDto request) {
         Symptom symptom = new Symptom();
