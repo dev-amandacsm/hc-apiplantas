@@ -6,10 +6,10 @@ import hcapiplantas.model.entity.Category;
 import hcapiplantas.repository.CategoryRepository;
 import hcapiplantas.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ObjectUtils;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
 
@@ -34,5 +34,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(Long id) throws DataNotFoundException {
         return repository.findById(id).orElseThrow(() -> new DataNotFoundException(id.toString()));
+    }
+
+    @Override
+    public Iterable<Category> getAllCategories() {
+        return repository.findAll();
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/categorias")
@@ -25,6 +27,13 @@ public class CategoryController {
         return ResponseEntity.ok(convertToDto(service.getCategoryById(id)));
     }
 
+    @GetMapping
+    public ResponseEntity<List<CategoryResponseDto>> getAllCategories(){
+        List<CategoryResponseDto> categories = new ArrayList<>();
+        service.getAllCategories().forEach(category -> categories.add(convertToDto(category)));
+        return ResponseEntity.ok(categories);
+    }
+
     @PostMapping
     public ResponseEntity<CategoryResponseDto> createCategory(@Valid @RequestBody CategoryRequestDto request) throws DataAlreadyExistsException {
         Category category = convertToEntity(request);
@@ -36,7 +45,6 @@ public class CategoryController {
     public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequestDto request) throws DataNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(convertToDto(service.updateCategory(id, convertToEntity(request))));
     }
-
 
     private Category convertToEntity(CategoryRequestDto data){
         Category category = new Category();
