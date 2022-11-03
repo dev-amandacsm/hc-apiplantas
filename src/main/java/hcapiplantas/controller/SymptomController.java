@@ -1,6 +1,7 @@
 package hcapiplantas.controller;
 
 import hcapiplantas.exception.DataAlreadyExistsException;
+import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.model.dto.SymptomRequestDto;
 import hcapiplantas.model.dto.SymptomResponseDto;
 import hcapiplantas.model.entity.Symptom;
@@ -8,10 +9,7 @@ import hcapiplantas.service.impl.SymptomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -22,12 +20,22 @@ public class SymptomController {
     @Autowired
     private SymptomServiceImpl service;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SymptomResponseDto> getSymptomById(@PathVariable Long id) throws DataNotFoundException {
+        return ResponseEntity.ok(convertToDto(service.getSymptomById(id)));
+    }
+
     @PostMapping
     public ResponseEntity<SymptomResponseDto> createSymptom(@Valid @RequestBody SymptomRequestDto request) throws DataAlreadyExistsException {
         Symptom symptom = convertToEntity(request);
-        SymptomResponseDto response = convertToDto(service.createSymptom(symptom));
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.createSymptom(symptom)));
     }
+
+//    @PutMapping("/{id}")
+//    public ResponseEntity<SymptomResponseDto> updateSymptom(@PathVariable Long id, @Valid @RequestBody SymptomRequestDto request){
+//        Symptom symptom = convertToEntity(request);
+//        return ResponseEntity.ok(convertToDto(service.updateCategory(id, symptom)));
+//    }
 
     private Symptom convertToEntity(SymptomRequestDto request) {
         Symptom symptom = new Symptom();

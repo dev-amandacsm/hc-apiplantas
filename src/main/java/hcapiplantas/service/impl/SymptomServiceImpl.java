@@ -1,6 +1,7 @@
 package hcapiplantas.service.impl;
 
 import hcapiplantas.exception.DataAlreadyExistsException;
+import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.model.entity.Symptom;
 import hcapiplantas.repository.SymptomRepository;
 import hcapiplantas.service.SymptomService;
@@ -19,4 +20,17 @@ public class SymptomServiceImpl implements SymptomService {
             return repository.save(symptom);
         throw new DataAlreadyExistsException(symptom.getName());
     }
+
+    @Override
+    public Symptom getSymptomById(Long id) throws DataNotFoundException {
+        return repository.findById(id).orElseThrow(() -> new DataNotFoundException(id.toString()));
+    }
+
+//    @Override
+//    public Symptom updateCategory(Long id, Symptom symptom) {
+//        Optional<Symptom> existingSymptom = repository.findById(id);
+//
+//        if(repository.findById(id).isEmpty()){
+//
+//    }
 }
