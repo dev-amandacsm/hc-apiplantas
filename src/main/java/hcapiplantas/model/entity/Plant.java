@@ -20,13 +20,13 @@ public class Plant {
     private Category category;
 
     @Column(name = "nm_popular", nullable = false, unique = true, length = 60)
-    private String nomePopular;
+    private String popularName;
 
     @Column(name = "nm_cientifico", nullable = false, unique = true, length = 60)
-    private String nomeCientifico;
+    private String scientificName;
 
     @Column(name = "ds_receita", nullable = false, length = 256)
-    private String receita;
+    private String recipe;
 
     @ManyToMany
     @JoinTable(
@@ -40,6 +40,6 @@ public class Plant {
             name = "tb_plantarestricao",
             joinColumns = @JoinColumn(name = "cd_planta"),
             inverseJoinColumns = @JoinColumn(name = "cd_restricao"))
-    private Set<Symptom> restrictions;
+    private Set<Restriction> restrictions;
 
 }
