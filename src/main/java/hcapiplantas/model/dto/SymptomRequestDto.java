@@ -8,16 +8,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class CategoryRequestDto {
+public class SymptomRequestDto {
 
     @NotBlank(message = GeneralConstants.NOT_BLANK_MESSAGE)
     @Pattern(regexp = GeneralConstants.NOT_SPECIAL_CHARACTER_60_PATTERN, message=GeneralConstants.OUTSIDE_EXPECTED_PATTERN_MESSAGE)
     @JsonProperty("nome")
     private String name;
-
-    @NotBlank(message = GeneralConstants.NOT_BLANK_MESSAGE)
-    @Pattern(regexp = GeneralConstants.NOT_SPECIAL_CHARACTER_256_PATTERN, message=GeneralConstants.OUTSIDE_EXPECTED_PATTERN_MESSAGE)
-    @JsonProperty("descricao")
-    private String description;
 
 }
