@@ -22,4 +22,15 @@ public class Restriction {
     @ManyToMany(mappedBy = "restrictions")
     private Set<Plant> plants;
 
+    public Long getId(){
+        return this.id;
+    }
+
+    public String getGroupName() {
+        return this.groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 }

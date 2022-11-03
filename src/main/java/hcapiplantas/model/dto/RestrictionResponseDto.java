@@ -8,6 +8,9 @@ import lombok.Data;
 @Builder
 public class RestrictionResponseDto {
 
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("nome_grupo")
     private String groupName;
     
