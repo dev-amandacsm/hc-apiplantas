@@ -8,6 +8,8 @@ import hcapiplantas.service.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SymptomServiceImpl implements SymptomService {
 
@@ -36,5 +38,10 @@ public class SymptomServiceImpl implements SymptomService {
         Symptom existingSymptom = getSymptomById(id);
         existingSymptom.setName(symptom.getName());
         return repository.save(existingSymptom);
+    }
+
+    @Override
+    public Optional<Symptom> getSymptomByName(String name) {
+        return repository.findByName(name);
     }
 }

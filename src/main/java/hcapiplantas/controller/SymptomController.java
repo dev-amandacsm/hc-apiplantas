@@ -20,36 +20,36 @@ import java.util.List;
 public class SymptomController {
 
     @Autowired
-    private SymptomServiceImpl service;
+    private SymptomServiceImpl symptomServiceImpl;
 
     @GetMapping("/{id}")
     public ResponseEntity<SymptomResponseDto> getSymptomById(@PathVariable Long id) throws DataNotFoundException {
-        return ResponseEntity.ok(convertToDto(service.getSymptomById(id)));
+        return ResponseEntity.ok(convertToDto(symptomServiceImpl.getSymptomById(id)));
     }
 
     @GetMapping
     public ResponseEntity<List<SymptomResponseDto>> getAllSymptoms(){
         List<SymptomResponseDto> symptoms = new ArrayList<>();
-        service.getAllSymptoms().forEach(symptom -> symptoms.add(convertToDto(symptom)));
+        symptomServiceImpl.getAllSymptoms().forEach(symptom -> symptoms.add(convertToDto(symptom)));
         return ResponseEntity.ok(symptoms);
     }
 
     @PostMapping
     public ResponseEntity<SymptomResponseDto> createSymptom(@Valid @RequestBody SymptomRequestDto request) throws DataAlreadyExistsException {
         Symptom symptom = convertToEntity(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.createSymptom(symptom)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(symptomServiceImpl.createSymptom(symptom)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SymptomResponseDto> updateSymptom(@PathVariable Long id, @Valid @RequestBody SymptomRequestDto request) throws DataNotFoundException {
         Symptom symptom = convertToEntity(request);
-        return ResponseEntity.ok(convertToDto(service.updateCategory(id, symptom)));
+        return ResponseEntity.ok(convertToDto(symptomServiceImpl.updateCategory(id, symptom)));
     }
 
     private Symptom convertToEntity(SymptomRequestDto request) {
-        Symptom symptom = new Symptom();
-        symptom.setName(request.getName());
-        return symptom;
+        return Symptom.builder()
+                .name(request.getName())
+            .build();
     }
 
     private SymptomResponseDto convertToDto(Symptom symptom){
