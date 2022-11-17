@@ -1,13 +1,10 @@
 package hcapiplantas.model.entity;
 
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.hibernate.annotations.CascadeType.*;
 
 @Entity(name = "planta")
 @Table(name = "tb_planta", schema = "db_herbcare_teste")
@@ -33,11 +30,15 @@ public class Plant {
     private Category category;
 
     @ManyToMany
-    @JoinColumn(name = "cd_sintoma")
-    private final Set<Symptom> symptoms = new HashSet<>();
+    @JoinTable(name = "tb_planta_sintoma",
+            joinColumns = @JoinColumn(name = "cd_planta"),
+            inverseJoinColumns = @JoinColumn(name = "cd_sintoma"))
+    private Set<Symptom> symptoms = new HashSet<>();
 
     @ManyToMany
-    @JoinColumn(name = "cd_restricao")
+    @JoinTable(name = "tb_planta_restricao",
+            joinColumns = @JoinColumn(name = "cd_planta"),
+            inverseJoinColumns = @JoinColumn(name = "cd_restricao"))
     private final Set<Restriction> restrictions = new HashSet<>();
 
     public Long getId() {

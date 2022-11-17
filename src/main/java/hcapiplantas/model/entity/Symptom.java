@@ -24,8 +24,7 @@ public class Symptom {
     @JsonProperty(value = "nome")
     private String name;
 
-    @ManyToMany
-    @JoinColumn(name = "cd_planta")
+    @ManyToMany(mappedBy = "symptoms")
     private Set<Plant> plants;
 
 }

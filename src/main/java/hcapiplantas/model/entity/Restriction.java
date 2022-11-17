@@ -27,8 +27,7 @@ public class Restriction {
     @JsonProperty(value = "nome_grupo")
     private String groupName;
 
-    @ManyToMany
-    @JoinColumn(name = "cd_planta")
+    @ManyToMany(mappedBy = "")
     private Set<Plant> plants;
 
     public Long getId(){
