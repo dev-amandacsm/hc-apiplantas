@@ -4,7 +4,6 @@ import hcapiplantas.exception.DataAlreadyExistsException;
 import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.model.dto.RestrictionRequestDto;
 import hcapiplantas.model.dto.RestrictionResponseDto;
-import hcapiplantas.model.dto.SymptomResponseDto;
 import hcapiplantas.model.entity.Restriction;
 import hcapiplantas.service.impl.RestrictionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +20,17 @@ import java.util.List;
 public class RestrictionController {
 
     @Autowired
-    private RestrictionServiceImpl service;
+    private RestrictionServiceImpl restrictionServiceImpl;
 
     @GetMapping("/{id}")
     public ResponseEntity<RestrictionResponseDto> getRestrictionById(@PathVariable Long id) throws DataNotFoundException {
-        return ResponseEntity.ok(convertToDto(service.getRestrictionById(id)));
+        return ResponseEntity.ok(convertToDto(restrictionServiceImpl.getRestrictionById(id)));
     }
 
     @GetMapping
-    public ResponseEntity<List<RestrictionResponseDto>> getAllRestrictions(){
+    public ResponseEntity<List<RestrictionResponseDto>> getAllRestrictions() {
         List<RestrictionResponseDto> restrictions = new ArrayList<>();
-        service.getAllRestrictions().forEach(restriction -> restrictions.add(convertToDto(restriction)));
+        restrictionServiceImpl.getAllRestrictions().forEach(restriction -> restrictions.add(convertToDto(restriction)));
         return ResponseEntity.ok(restrictions);
     }
 
@@ -39,21 +38,21 @@ public class RestrictionController {
     @PostMapping
     public ResponseEntity<RestrictionResponseDto> createSymptom(@Valid @RequestBody RestrictionRequestDto request) throws DataAlreadyExistsException {
         Restriction restriction = convertToEntity(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(service.createRestriction(restriction)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(convertToDto(restrictionServiceImpl.createRestriction(restriction)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestrictionResponseDto> updateSymptom(@PathVariable Long id, @Valid @RequestBody RestrictionRequestDto request) throws DataNotFoundException{
-        return ResponseEntity.status(HttpStatus.OK).body(convertToDto(service.updateRestriction(id, convertToEntity(request))));
+    public ResponseEntity<RestrictionResponseDto> updateSymptom(@PathVariable Long id, @Valid @RequestBody RestrictionRequestDto request) throws DataNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(convertToDto(restrictionServiceImpl.updateRestriction(id, convertToEntity(request))));
     }
 
     private Restriction convertToEntity(RestrictionRequestDto request) {
-        Restriction restriction = new Restriction();
-        restriction.setGroupName(request.getGroupName());
-        return restriction;
+        return Restriction.builder()
+                .groupName(request.getGroupName())
+                .build();
     }
 
-    private RestrictionResponseDto convertToDto(Restriction restriction){
+    private RestrictionResponseDto convertToDto(Restriction restriction) {
         return RestrictionResponseDto.builder()
                 .id(restriction.getId().toString())
                 .groupName(restriction.getGroupName())

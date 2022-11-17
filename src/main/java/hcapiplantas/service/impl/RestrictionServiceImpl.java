@@ -8,6 +8,8 @@ import hcapiplantas.service.RestrictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RestrictionServiceImpl implements RestrictionService {
 
@@ -36,6 +38,11 @@ public class RestrictionServiceImpl implements RestrictionService {
         Restriction existingRestriction = getRestrictionById(id);
         existingRestriction.setGroupName(restriction.getGroupName());
         return repository.save(existingRestriction);
+    }
+
+    @Override
+    public Optional<Restriction> getRestrictionByGroupName(String groupName){
+        return repository.findByGroupName(groupName);
     }
 
 }

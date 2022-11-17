@@ -1,7 +1,6 @@
 package hcapiplantas.exception.handler;
 
-import hcapiplantas.exception.DataAlreadyExistsException;
-import hcapiplantas.exception.DataNotFoundException;
+import hcapiplantas.exception.*;
 import hcapiplantas.model.dto.StandardErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(standardErrorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DataNotFoundException.class)
+    @ExceptionHandler({DataNotFoundException.class, CategoryNotFoundException.class, SymptomNotFoundException.class, RestrictionNotFoundException.class})
     public ResponseEntity<StandardErrorResponse> handleNotFoundException(Exception ex){
         standardErrorResponse.setTimestamp(LocalDateTime.now());
         standardErrorResponse.setStatus(HttpStatus.NOT_FOUND);
