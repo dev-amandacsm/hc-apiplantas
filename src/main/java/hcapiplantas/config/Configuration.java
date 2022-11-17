@@ -1,15 +1,27 @@
 package hcapiplantas.config;
 
 import hcapiplantas.service.impl.CategoryServiceImpl;
-import org.modelmapper.ModelMapper;
+import hcapiplantas.service.impl.RestrictionServiceImpl;
+import hcapiplantas.service.impl.SymptomServiceImpl;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@org.springframework.context.annotation.Configuration
+@SpringBootConfiguration
 public class Configuration {
 
     @Bean
-    public CategoryServiceImpl service(){
+    public CategoryServiceImpl categoryServiceImpl(){
         return new CategoryServiceImpl();
+    }
+
+    @Bean
+    public SymptomServiceImpl symptomServiceImpl(){
+        return new SymptomServiceImpl();
+    }
+
+    @Bean
+    public RestrictionServiceImpl restrictionServiceImpl(){
+        return new RestrictionServiceImpl();
     }
 
 }

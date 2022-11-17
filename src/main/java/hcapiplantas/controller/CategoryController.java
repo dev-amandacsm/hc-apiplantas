@@ -20,30 +20,30 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryServiceImpl service;
+    private CategoryServiceImpl categoryServiceImpl;
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Long id) throws DataNotFoundException {
-        return ResponseEntity.ok(convertToDto(service.getCategoryById(id)));
+        return ResponseEntity.ok(convertToDto(categoryServiceImpl.getCategoryById(id)));
     }
 
     @GetMapping
     public ResponseEntity<List<CategoryResponseDto>> getAllCategories(){
         List<CategoryResponseDto> categories = new ArrayList<>();
-        service.getAllCategories().forEach(category -> categories.add(convertToDto(category)));
+        categoryServiceImpl.getAllCategories().forEach(category -> categories.add(convertToDto(category)));
         return ResponseEntity.ok(categories);
     }
 
     @PostMapping
     public ResponseEntity<CategoryResponseDto> createCategory(@Valid @RequestBody CategoryRequestDto request) throws DataAlreadyExistsException {
         Category category = convertToEntity(request);
-        CategoryResponseDto response = convertToDto(service.createCategory(category));
+        CategoryResponseDto response = convertToDto(categoryServiceImpl.createCategory(category));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequestDto request) throws DataNotFoundException {
-        return ResponseEntity.status(HttpStatus.OK).body(convertToDto(service.updateCategory(id, convertToEntity(request))));
+        return ResponseEntity.status(HttpStatus.OK).body(convertToDto(categoryServiceImpl.updateCategory(id, convertToEntity(request))));
     }
 
     private Category convertToEntity(CategoryRequestDto data){

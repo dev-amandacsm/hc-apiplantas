@@ -1,6 +1,7 @@
 package hcapiplantas.model.entity;
 
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,6 +22,7 @@ public class Category {
     @Column(name = "ds_categoria", nullable = false, length = 256)
     private String description;
 
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @OneToMany(mappedBy = "category")
     private Set<Plant> plants;
 
