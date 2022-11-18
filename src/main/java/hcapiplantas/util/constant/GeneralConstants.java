@@ -1,7 +1,9 @@
 package hcapiplantas.util.constant;
 
 public abstract class GeneralConstants {
-
+    //host
+    public static final String LOCAL_HOST = "http://localhost:8080/";
+    public static final String DEV_HOST = "http://testes:8080/";
 
     //regex patterns
     public static final String NOT_SPECIAL_CHARACTER_256_PATTERN = "^[\\wóáõãâêéúíç.,:;%\\d ]{0,256}$";

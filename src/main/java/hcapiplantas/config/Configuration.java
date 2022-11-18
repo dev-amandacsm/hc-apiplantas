@@ -3,10 +3,9 @@ package hcapiplantas.config;
 import hcapiplantas.service.impl.CategoryServiceImpl;
 import hcapiplantas.service.impl.RestrictionServiceImpl;
 import hcapiplantas.service.impl.SymptomServiceImpl;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootConfiguration
+@org.springframework.context.annotation.Configuration
 public class Configuration {
 
     @Bean

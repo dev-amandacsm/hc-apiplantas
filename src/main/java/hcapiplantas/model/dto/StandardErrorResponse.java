@@ -11,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class StandardErrorResponse {
 
-    public LocalDateTime timestamp;
-    public HttpStatus status;
-    public List<String> errors;
+    private LocalDateTime timestamp;
+    private HttpStatus status;
+    private List<String> errors;
 
 }
