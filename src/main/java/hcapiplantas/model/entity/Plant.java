@@ -39,7 +39,7 @@ public class Plant {
     @JoinTable(name = "tb_planta_restricao",
             joinColumns = @JoinColumn(name = "cd_planta"),
             inverseJoinColumns = @JoinColumn(name = "cd_restricao"))
-    private final Set<Restriction> restrictions = new HashSet<>();
+    private Set<Restriction> restrictions = new HashSet<>();
 
     public Long getId() {
         return this.id;

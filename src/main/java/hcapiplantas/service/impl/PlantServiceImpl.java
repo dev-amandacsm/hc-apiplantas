@@ -1,9 +1,6 @@
 package hcapiplantas.service.impl;
 
-import hcapiplantas.exception.CategoryNotFoundException;
-import hcapiplantas.exception.DataAlreadyExistsException;
-import hcapiplantas.exception.RestrictionNotFoundException;
-import hcapiplantas.exception.SymptomNotFoundException;
+import hcapiplantas.exception.*;
 import hcapiplantas.model.dto.PlantRequestDto;
 import hcapiplantas.model.entity.Plant;
 import hcapiplantas.model.entity.Restriction;
@@ -78,5 +75,16 @@ public class PlantServiceImpl implements PlantService {
     @Override
     public Optional<Plant> getPlantByScientificName(String scientificName) {
         return repository.findByScientificName(scientificName);
+    }
+
+    @Override
+    public Plant getPlantById(Long id) throws DataNotFoundException {
+        return repository.findById(id).orElseThrow(() -> new DataNotFoundException(id.toString()));
+    }
+
+    @Override
+    public void deletePlant(Long id) throws DataNotFoundException {
+        Plant plant = this.getPlantById(id);
+        repository.delete(plant);
     }
 }
