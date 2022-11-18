@@ -1,6 +1,7 @@
 package hcapiplantas.service.impl;
 
 import hcapiplantas.exception.CategoryNotFoundException;
+import hcapiplantas.exception.DataAlreadyExistsException;
 import hcapiplantas.exception.RestrictionNotFoundException;
 import hcapiplantas.exception.SymptomNotFoundException;
 import hcapiplantas.model.dto.PlantRequestDto;
@@ -33,7 +34,15 @@ public class PlantServiceImpl implements PlantService {
     private RestrictionRepository restrictionRepository;
 
     @Override
-    public Plant createPlant(PlantRequestDto plantRequestDto) throws CategoryNotFoundException, RestrictionNotFoundException, SymptomNotFoundException {
+    public Plant createPlant(PlantRequestDto plantRequestDto) throws CategoryNotFoundException, RestrictionNotFoundException, SymptomNotFoundException, DataAlreadyExistsException {
+        if(repository.findByPopularName(plantRequestDto.getPopularName()).isPresent()){
+            throw new DataAlreadyExistsException(plantRequestDto.getPopularName());
+        }
+
+        if(repository.findByScientificName(plantRequestDto.getScientificName()).isPresent()){
+            throw new DataAlreadyExistsException(plantRequestDto.getScientificName());
+        }
+
         Plant plantEntity = new Plant();
         plantEntity.setPopularName(plantRequestDto.getPopularName());
         plantEntity.setScientificName(plantRequestDto.getScientificName());
@@ -59,5 +68,15 @@ public class PlantServiceImpl implements PlantService {
 
         return repository.save(plantEntity);
 
+    }
+
+    @Override
+    public Optional<Plant> getPlantByPopularName(String popularName){
+        return repository.findByPopularName(popularName);
+    }
+
+    @Override
+    public Optional<Plant> getPlantByScientificName(String scientificName) {
+        return repository.findByScientificName(scientificName);
     }
 }
