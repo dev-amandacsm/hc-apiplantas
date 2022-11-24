@@ -1,5 +1,6 @@
 package hcapiplantas.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -40,6 +41,10 @@ public class Plant {
             joinColumns = @JoinColumn(name = "cd_planta"),
             inverseJoinColumns = @JoinColumn(name = "cd_restricao"))
     private Set<Restriction> restrictions = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "plants")
+    private Set<User> users;
 
     public Long getId() {
         return this.id;
