@@ -2,6 +2,7 @@ package hcapiplantas.service.impl;
 
 
 import hcapiplantas.exception.DataAlreadyExistsException;
+import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.model.dto.StateRequestDto;
 import hcapiplantas.model.entity.State;
 import hcapiplantas.repository.StateRepository;
@@ -28,5 +29,16 @@ public class StateServiceImpl implements StateService {
         stateEntity.setName(request.getName());
 
         return repository.save(stateEntity);
+    }
+
+    @Override
+    public State getStateById(String acronym) throws DataNotFoundException {
+        return repository.findByAcronym(acronym).orElseThrow(() -> new DataNotFoundException(acronym));
+    }
+
+    @Override
+    public void deleteState(String acronym) throws DataNotFoundException {
+        State state = this.getStateById(acronym);
+        repository.delete(state);
     }
 }

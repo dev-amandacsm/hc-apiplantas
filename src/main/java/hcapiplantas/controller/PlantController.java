@@ -41,7 +41,7 @@ public class PlantController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PlantResponseDto> getPlantById(@PathVariable String id) throws DataNotFoundException, URISyntaxException, MalformedURLException {
         Plant plant = plantServiceImpl.getPlantById(Long.valueOf(id));
         return ResponseEntity.ok(PlantResponseDto.fromEntityToResponse(plant));
