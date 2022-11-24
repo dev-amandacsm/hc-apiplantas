@@ -9,10 +9,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class State {
     @Id
-    @Column(name = "sg_Estado", length = 2)
+    @Column(name = "sg_estado", length = 2)
     private String id;
 
-    @Column(name = "nm_Estado", length = 45, unique = true, nullable = false)
+    @Column(name = "nm_estado", length = 45, unique = true, nullable = false)
     private String name;
 
     public String getId() {

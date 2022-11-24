@@ -10,7 +10,7 @@ public class City {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nm_Cidade", length = 75, unique = true, nullable = false)
+    @Column(name = "nm_cidade", length = 75, unique = true, nullable = false)
     private String name;
 
     @ManyToOne
