@@ -21,4 +21,6 @@ public interface PlantService {
     List<Plant> getPlantBySymptom(String symptom) throws DataNotFoundException, SymptomNotFoundException;
 
     List<Plant> getAll();
+
+    List<Plant> getPlantByCategory(String category) throws CategoryNotFoundException, DataNotFoundException;
 }

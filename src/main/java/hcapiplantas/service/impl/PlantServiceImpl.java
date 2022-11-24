@@ -3,6 +3,7 @@ package hcapiplantas.service.impl;
 import hcapiplantas.exception.*;
 import hcapiplantas.model.dto.PlantRequestDto;
 import hcapiplantas.model.dto.SymptomRequestDto;
+import hcapiplantas.model.entity.Category;
 import hcapiplantas.model.entity.Plant;
 import hcapiplantas.model.entity.Restriction;
 import hcapiplantas.model.entity.Symptom;
@@ -97,6 +98,15 @@ public class PlantServiceImpl implements PlantService {
         List<Plant> plants = repository.findBySymptoms(symptomEntity);
         if(plants.isEmpty())
             throw new DataNotFoundException(symptom);
+        return plants;
+    }
+
+    @Override
+    public List<Plant> getPlantByCategory(String category) throws CategoryNotFoundException, DataNotFoundException {
+        Category categoryEntity = categoryRepository.findByName(category).orElseThrow(() -> new CategoryNotFoundException(category));
+        List<Plant> plants = repository.findByCategory(categoryEntity);
+        if(plants.isEmpty())
+            throw new DataNotFoundException(category);
         return plants;
     }
 

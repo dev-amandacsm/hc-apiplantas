@@ -28,7 +28,6 @@ public class PlantController {
     @Autowired
     private PlantServiceImpl plantServiceImpl;
 
-
     @PostMapping
     public ResponseEntity<PlantResponseDto> createPlant(@Valid @RequestBody PlantRequestDto request) throws DataAlreadyExistsException, CategoryNotFoundException, RestrictionNotFoundException, SymptomNotFoundException, URISyntaxException, MalformedURLException {
         Plant plant = plantServiceImpl.createPlant(request);
@@ -50,15 +49,23 @@ public class PlantController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PlantResponseDto>> getPlantBySymptom(@Nullable @RequestParam String symptom) throws URISyntaxException, DataNotFoundException, SymptomNotFoundException, MalformedURLException {
+    public ResponseEntity<List<PlantResponseDto>> getPlantBySymptom(@Nullable @RequestParam String symptom, @Nullable @RequestParam String category) throws URISyntaxException, DataNotFoundException, SymptomNotFoundException, MalformedURLException, CategoryNotFoundException {
         List<PlantResponseDto> plantResponseDtoList = new ArrayList<>();
-        List<Plant> plants = ObjectUtils.isEmpty(symptom) ? plantServiceImpl.getAll() :  plantServiceImpl.getPlantBySymptom(symptom);
+        List<Plant> plants;
+
+        if(ObjectUtils.isEmpty(category) && ObjectUtils.isEmpty(symptom))
+            plants = plantServiceImpl.getAll();
+        else if(ObjectUtils.isEmpty(symptom))
+            plants = plantServiceImpl.getPlantByCategory(category);
+        else
+            plants = plantServiceImpl.getPlantBySymptom(symptom);
 
         for (Plant plant : plants) {
             PlantResponseDto plantResponseDto = PlantResponseDto.fromEntityToResponse(plant);
             plantResponseDto.setLink(new URI(ServletUriComponentsBuilder.fromCurrentRequestUri().build() + "/" + plant.getId()));
             plantResponseDtoList.add(plantResponseDto);
         }
+
         return ResponseEntity.ok(plantResponseDtoList);
     }
 
