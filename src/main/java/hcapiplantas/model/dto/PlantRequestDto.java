@@ -2,7 +2,6 @@ package hcapiplantas.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hcapiplantas.model.entity.Restriction;
-import hcapiplantas.model.entity.Symptom;
 import hcapiplantas.util.constant.GeneralConstants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,7 +40,7 @@ public class PlantRequestDto {
     @Valid
     @NotNull
     @JsonProperty("sintomas")
-    private Set<Symptom> symptoms;
+    private Set<SymptomRequestDto> symptoms;
 
     @Valid
     @NotNull

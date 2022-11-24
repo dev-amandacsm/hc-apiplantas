@@ -2,9 +2,9 @@ package hcapiplantas.service;
 
 import hcapiplantas.exception.*;
 import hcapiplantas.model.dto.PlantRequestDto;
-import hcapiplantas.model.dto.PlantResponseDto;
 import hcapiplantas.model.entity.Plant;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PlantService {
@@ -17,4 +17,8 @@ public interface PlantService {
     Plant getPlantById(Long id) throws DataNotFoundException;
 
     void deletePlant(Long id) throws DataNotFoundException;
+
+    List<Plant> getPlantBySymptom(String symptom) throws DataNotFoundException, SymptomNotFoundException;
+
+    List<Plant> getAll();
 }

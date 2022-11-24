@@ -1,11 +1,10 @@
 package hcapiplantas.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
-
 
 @Entity(name = "sintoma")
 @Getter
@@ -24,6 +23,7 @@ public class Symptom {
     @JsonProperty(value = "nome")
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "symptoms")
     private Set<Plant> plants;
 

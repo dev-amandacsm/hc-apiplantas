@@ -1,21 +1,25 @@
 package hcapiplantas.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hcapiplantas.model.entity.Plant;
 import hcapiplantas.model.entity.Restriction;
 import hcapiplantas.model.entity.Symptom;
-import lombok.Builder;
-import lombok.Data;
+import hcapiplantas.util.constant.GeneralConstants;
+import lombok.*;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
 @Builder
 public class PlantResponseDto {
-
-    @JsonProperty("id")
-    private String id;
 
     @JsonProperty("nome_popular")
     private String popularName;
@@ -38,9 +42,12 @@ public class PlantResponseDto {
     @JsonProperty("restricoes")
     private Set<String> restrictions;
 
-    public static PlantResponseDto fromEntityToResponse(Plant plant) {
+    private URI link;
+
+    private LocalDateTime timestamp;
+
+    public static PlantResponseDto fromEntityToResponse(Plant plant) throws URISyntaxException, MalformedURLException {
         return PlantResponseDto.builder()
-                .id(plant.getId().toString())
                 .popularName(plant.getPopularName())
                 .scientificName(plant.getScientificName())
                 .recipe(plant.getRecipe())
@@ -48,6 +55,7 @@ public class PlantResponseDto {
                 .categoryDescription(plant.getCategory().getDescription())
                 .symptoms(plant.getSymptoms().stream().map(Symptom::getName).collect(Collectors.toSet()))
                 .restrictions(plant.getRestrictions().stream().map(Restriction::getGroupName).collect(Collectors.toSet()))
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 

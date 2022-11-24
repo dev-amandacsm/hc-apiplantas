@@ -2,6 +2,7 @@ package hcapiplantas.service.impl;
 
 import hcapiplantas.exception.*;
 import hcapiplantas.model.dto.PlantRequestDto;
+import hcapiplantas.model.dto.SymptomRequestDto;
 import hcapiplantas.model.entity.Plant;
 import hcapiplantas.model.entity.Restriction;
 import hcapiplantas.model.entity.Symptom;
@@ -13,6 +14,8 @@ import hcapiplantas.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,7 +58,7 @@ public class PlantServiceImpl implements PlantService {
             plantEntity.addRestriction(restriction.get());
         }
 
-        for(Symptom s : plantRequestDto.getSymptoms()){
+        for(SymptomRequestDto s : plantRequestDto.getSymptoms()){
             Optional<Symptom> symptom = symptomRepository.findByName(s.getName());
             if(symptom.isEmpty()){
                 throw new SymptomNotFoundException(s.getName());
@@ -86,5 +89,21 @@ public class PlantServiceImpl implements PlantService {
     public void deletePlant(Long id) throws DataNotFoundException {
         Plant plant = this.getPlantById(id);
         repository.delete(plant);
+    }
+
+    @Override
+    public List<Plant> getPlantBySymptom(String symptom) throws DataNotFoundException, SymptomNotFoundException {
+        Symptom symptomEntity = symptomRepository.findByName(symptom).orElseThrow(() -> new SymptomNotFoundException(symptom));
+        List<Plant> plants = repository.findBySymptoms(symptomEntity);
+        if(plants.isEmpty())
+            throw new DataNotFoundException(symptom);
+        return plants;
+    }
+
+    @Override
+    public List<Plant> getAll() {
+        List<Plant> plants = new ArrayList<>();
+        repository.findAll().forEach(plants::add);
+        return plants;
     }
 }
