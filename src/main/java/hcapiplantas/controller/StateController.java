@@ -15,6 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/estados")
@@ -35,6 +37,19 @@ public class StateController {
     public ResponseEntity<StateResponseDto> getStateById(@PathVariable String acronym) throws DataNotFoundException {
         State state = stateService.getStateById(acronym);
         return ResponseEntity.ok(StateResponseDto.fromEntityToResponse(state));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StateResponseDto>> getAllStates() throws URISyntaxException {
+        List<StateResponseDto> stateResponseDtoList = new ArrayList<>();
+        List<State> states = stateService.getAllStates();
+        for (State s : states) {
+            StateResponseDto stateResponseDto = StateResponseDto.fromEntityToResponse(s);
+            stateResponseDto.setLink(new URI(ServletUriComponentsBuilder.fromCurrentRequestUri().build() + "/" + s.getAcronym()));
+            stateResponseDtoList.add(stateResponseDto);
+
+        }
+        return ResponseEntity.ok(stateResponseDtoList);
     }
 
     @DeleteMapping("/{acronym}")
