@@ -10,17 +10,21 @@ import javax.persistence.*;
 public class State {
     @Id
     @Column(name = "sg_estado", length = 2)
-    private String id;
+    private String acronym;
 
-    @Column(name = "nm_estado", length = 45, unique = true, nullable = false)
+    @Column(name = "nm_estado", length = 60, unique = true, nullable = false)
     private String name;
 
-    public String getId() {
-        return id;
+    public String getAcronym() {
+        return acronym;
     }
 
     public String getName(){
         return name;
+    }
+
+    public void setAcronym(String acronym){
+        this.acronym = acronym;
     }
 
     public void setName(String name) {

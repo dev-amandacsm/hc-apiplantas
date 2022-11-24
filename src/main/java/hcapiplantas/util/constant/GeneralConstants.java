@@ -9,6 +9,8 @@ public abstract class GeneralConstants {
     public static final String NOT_SPECIAL_CHARACTER_256_PATTERN = "^[\\wóáõãâêéúíç.,:;%\\d ]{0,256}$";
     public static final String NOT_SPECIAL_CHARACTER_60_PATTERN = "^[\\wóáõãâêéúíç.,:;%\\d ]{0,60}$";
 
+    public static final String STATE_ACRONYM_CHARACTER_2_PATTERN = "^[A-Z]{2,2}$";
+
     //constraints violation messages
     public static final String NOT_BLANK_MESSAGE = "O campo não pode estar em branco.";
     public static final String OUTSIDE_EXPECTED_PATTERN_MESSAGE = "O campo está fora do padrão esperado.";
