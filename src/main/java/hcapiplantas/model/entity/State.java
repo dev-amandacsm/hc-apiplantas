@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity(name = "estado")
-@Table(name = "tb_Estado", schema = "db_herbcare_teste")
+@Table(name = "tb_estado", schema = "db_herbcare_teste")
 @NoArgsConstructor
 public class State {
     @Id
