@@ -1,7 +1,7 @@
 package hcapiplantas.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import hcapiplantas.model.entity.State;
+import hcapiplantas.model.entity.City;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class StateResponseDto {
+public class CityResponseDto {
 
-    @JsonProperty("sigla_uf")
+    @JsonProperty("sigla_estado")
     private String acronym;
 
     @JsonProperty("nome")
@@ -22,10 +22,10 @@ public class StateResponseDto {
 
     private LocalDateTime timestamp;
 
-    public static StateResponseDto fromEntityToResponse(State state) {
-        return StateResponseDto.builder()
-                .acronym(state.getAcronym())
-                .name(state.getName())
+    public static CityResponseDto fromEntityToResponse(City city) {
+        return CityResponseDto.builder()
+                .acronym(city.getState().getAcronym())
+                .name(city.getName())
                 .timestamp(LocalDateTime.now())
                 .build();
     }

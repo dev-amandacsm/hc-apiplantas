@@ -2,7 +2,6 @@ package hcapiplantas.controller;
 
 import hcapiplantas.exception.DataAlreadyExistsException;
 import hcapiplantas.exception.DataNotFoundException;
-import hcapiplantas.model.dto.PlantResponseDto;
 import hcapiplantas.model.dto.StateRequestDto;
 import hcapiplantas.model.dto.StateResponseDto;
 import hcapiplantas.model.entity.State;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
