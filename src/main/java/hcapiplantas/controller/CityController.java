@@ -53,7 +53,7 @@ public class CityController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CityResponseDto> deleteState(@PathVariable Long id) throws DataNotFoundException {
+    public ResponseEntity<CityResponseDto> deleteCity(@PathVariable Long id) throws DataNotFoundException {
         cityService.deleteCity(id);
         return ResponseEntity.noContent().build();
     }
