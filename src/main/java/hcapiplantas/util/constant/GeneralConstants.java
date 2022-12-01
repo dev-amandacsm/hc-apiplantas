@@ -6,9 +6,9 @@ public abstract class GeneralConstants {
     public static final String DEV_HOST = "http://testes:8080/";
 
     //regex patterns
-    public static final String NOT_SPECIAL_CHARACTER_256_PATTERN = "^[\\wóáõãâêéúíç.,:;%\\d ]{0,256}$";
-    public static final String NOT_SPECIAL_CHARACTER_60_PATTERN = "^[\\wóáõãâêéúíç.,:;%\\d ]{0,60}$";
-    public static final String NOT_SPECIAL_CHARACTER_45_PATTERN = "^[\\wóáõãâêéúíç.,:;%\\d ]{0,45}$";
+    public static final String NOT_SPECIAL_CHARACTER_256_PATTERN = "^[\\wóáôàõãâêéúíç.,:;%\\d ]{0,256}$";
+    public static final String NOT_SPECIAL_CHARACTER_60_PATTERN = "^[\\wóôáàõãâêéúíç.,:;%\\d ]{0,60}$";
+    public static final String NOT_SPECIAL_CHARACTER_45_PATTERN = "^[\\wóáàôõãâêéúíç.,:;%\\d ]{0,45}$";
 
 
     public static final String STATE_ACRONYM_CHARACTER_2_PATTERN = "^[A-Z]{2,2}$";

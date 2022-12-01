@@ -6,6 +6,7 @@ import hcapiplantas.util.constant.GeneralConstants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -29,9 +30,14 @@ public class PlantRequestDto {
     private String scientificName;
 
     @NotBlank(message = GeneralConstants.NOT_BLANK_MESSAGE)
-    @Pattern(regexp = GeneralConstants.NOT_SPECIAL_CHARACTER_256_PATTERN, message = GeneralConstants.OUTSIDE_EXPECTED_PATTERN_MESSAGE)
+    @Length(max = 256)
     @JsonProperty("receita")
     private String recipe;
+
+    @NotBlank(message = GeneralConstants.NOT_BLANK_MESSAGE)
+    @Length(max = 256)
+    @JsonProperty("descricao")
+    private String description;
 
     @NotNull
     @JsonProperty("id_categoria")

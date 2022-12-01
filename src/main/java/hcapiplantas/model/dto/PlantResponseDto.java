@@ -1,19 +1,16 @@
 package hcapiplantas.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hcapiplantas.model.entity.Plant;
 import hcapiplantas.model.entity.Restriction;
 import hcapiplantas.model.entity.Symptom;
-import hcapiplantas.util.constant.GeneralConstants;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,6 +26,9 @@ public class PlantResponseDto {
 
     @JsonProperty("receita")
     private String recipe;
+
+    @JsonProperty("descricao")
+    private String description;
 
     @JsonProperty("categoria")
     private String category;
@@ -51,6 +51,7 @@ public class PlantResponseDto {
                 .popularName(plant.getPopularName())
                 .scientificName(plant.getScientificName())
                 .recipe(plant.getRecipe())
+                .description(plant.getDescription())
                 .category(plant.getCategory().getName())
                 .categoryDescription(plant.getCategory().getDescription())
                 .symptoms(plant.getSymptoms().stream().map(Symptom::getName).collect(Collectors.toSet()))
