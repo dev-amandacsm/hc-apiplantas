@@ -20,10 +20,10 @@ public class Store {
     @Column(name = "ds_loja", length = 200, nullable = false)
     private String description;
 
-    @Column(name = "ds_contato", length = 45, nullable = false)
+    @Column(name = "ds_contato", length = 60, nullable = false)
     private String contact;
 
-    @Column(name = "ds_logradouro", length = 45, nullable = false)
+    @Column(name = "ds_logradouro", length = 60, nullable = false)
     private String street;
 
     @Column(name = "ds_complemento", length = 45)

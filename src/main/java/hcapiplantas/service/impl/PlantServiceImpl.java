@@ -48,6 +48,7 @@ public class PlantServiceImpl implements PlantService {
         plantEntity.setPopularName(plantRequestDto.getPopularName());
         plantEntity.setScientificName(plantRequestDto.getScientificName());
         plantEntity.setRecipe(plantRequestDto.getRecipe());
+        plantEntity.setDescription(plantRequestDto.getDescription());
         plantEntity.setCategory(categoryRepository.findById(plantRequestDto.getCategoryId())
                 .orElseThrow(() -> new CategoryNotFoundException(plantRequestDto.getCategoryId().toString())));
 

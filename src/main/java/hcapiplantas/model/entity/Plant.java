@@ -26,6 +26,9 @@ public class Plant {
     @Column(name = "ds_receita", nullable = false, length = 256)
     private String recipe;
 
+    @Column(name = "ds_descricao", nullable = false, length = 256)
+    private String description;
+
     @ManyToOne
     @JoinColumn(name="cd_categoria", nullable = false)
     private Category category;
@@ -62,6 +65,8 @@ public class Plant {
         return recipe;
     }
 
+    public String getDescription(){ return description; }
+
     public Category getCategory() {
         return this.category;
     }
@@ -84,6 +89,10 @@ public class Plant {
 
     public void setRecipe(String recipe) {
         this.recipe = recipe;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
     }
 
     public void setCategory(Category category){
