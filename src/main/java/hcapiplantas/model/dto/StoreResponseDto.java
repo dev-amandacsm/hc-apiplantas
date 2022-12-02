@@ -33,7 +33,7 @@ public class StoreResponseDto {
     @JsonProperty("complemento")
     private String addressComplement;
 
-    @JsonProperty("nome_bairro")
+    @JsonProperty("bairro")
     private District district;
 
     private URI link;

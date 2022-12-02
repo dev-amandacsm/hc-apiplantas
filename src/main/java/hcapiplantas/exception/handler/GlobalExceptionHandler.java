@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     private final StandardErrorResponse standardErrorResponse = new StandardErrorResponse();
 
-    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataAlreadyExistsException.class, SQLIntegrityConstraintViolationException.class})
+    @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class, DataAlreadyExistsException.class, SQLIntegrityConstraintViolationException.class, UserAlreadyExistsException.class})
     public ResponseEntity<StandardErrorResponse> handleBadRequestException(Exception ex){
         standardErrorResponse.setTimestamp(LocalDateTime.now());
         standardErrorResponse.setStatus(HttpStatus.BAD_REQUEST);

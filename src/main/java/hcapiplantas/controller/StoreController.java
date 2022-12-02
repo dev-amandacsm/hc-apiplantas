@@ -40,7 +40,6 @@ public class StoreController {
         return ResponseEntity.ok(StoreResponseDto.fromEntityToResponse(store));
     }
 
-    
     @GetMapping
     public ResponseEntity<List<StoreResponseDto>> getAllStoresLimited() throws URISyntaxException {
         List<StoreResponseDto> storeResponseDtoList = new ArrayList<>();
