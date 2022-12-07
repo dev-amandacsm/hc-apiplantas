@@ -24,6 +24,9 @@ public class User {
     @Column(name = "ds_senha", length = 45, nullable = false)
     private String password;
 
+    @Column(name = "ds_profile", length = 10, nullable = false)
+    private String profile;
+
     @Column(name = "ds_logradouro", length = 45, nullable = false)
     private String street;
 
@@ -68,6 +71,14 @@ public class User {
         this.password = password;
     }
 
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile){
+        this.profile = profile;
+    }
+
     public String getStreet() {
         return street;
     }
@@ -99,4 +110,5 @@ public class User {
     public void setPlants(Set<Plant> plants) {
         this.plants = plants;
     }
+
 }

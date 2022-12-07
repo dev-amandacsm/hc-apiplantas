@@ -8,6 +8,7 @@ import hcapiplantas.model.entity.User;
 import hcapiplantas.repository.DistrictRepository;
 import hcapiplantas.repository.UserRepository;
 import hcapiplantas.service.UserService;
+import hcapiplantas.util.EncondingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,8 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setName(request.getName());
-        user.setLogin(request.getLogin());
-        user.setPassword(request.getPassword());
+        user.setLogin(EncondingUtils.encode(request.getLogin()));
+        user.setPassword(EncondingUtils.encode(request.getPassword()));
         user.setStreet(request.getStreet());
         user.setAddressComplement(request.getAddressComplement());
         user.setDistrict(districtRepository.findByName(request.getDistrictName()).orElseThrow(DistrictNotFoundException::new));

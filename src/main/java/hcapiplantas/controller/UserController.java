@@ -1,6 +1,5 @@
 package hcapiplantas.controller;
 
-import hcapiplantas.exception.DataAlreadyExistsException;
 import hcapiplantas.exception.DataNotFoundException;
 import hcapiplantas.exception.DistrictNotFoundException;
 import hcapiplantas.exception.UserAlreadyExistsException;
@@ -15,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor

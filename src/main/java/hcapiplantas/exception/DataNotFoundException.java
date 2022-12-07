@@ -8,4 +8,8 @@ public class DataNotFoundException extends Exception {
         super(String.format(GeneralConstants.DATA_NOT_FOUND_MESSAGE, message));
     }
 
+    public DataNotFoundException(){
+
+    }
+
 }
